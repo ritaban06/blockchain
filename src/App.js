@@ -7,16 +7,16 @@ const BalanceChecker = () => {
   const [error, setError] = useState('');
 
   const checkBalance = async () => {
-    if (!ethers.utils.isAddress(address)) {
+    if (!ethers.isAddress(address)) {
       setError('Invalid Ethereum address');
       setBalance(null);
       return;
     }
 
     try {
-      const provider = new ethers.providers.JsonRpcProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
+      const provider = new ethers.JsonRpcProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
       const balanceWei = await provider.getBalance(address);
-      const balanceEth = ethers.utils.formatEther(balanceWei);
+      const balanceEth = ethers.formatEther(balanceWei);
       setBalance(balanceEth);
       setError('');
     } catch (err) {
